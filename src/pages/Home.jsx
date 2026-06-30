@@ -116,6 +116,48 @@ function Home() {
   const [isFading, setIsFading] = useState(false);
   const [activeFaq, setActiveFaq] = useState(null);
 
+  // New Interactive Widgets States
+  const [quizStep, setQuizStep] = useState(0); // 0: Intro, 1: Q1, 2: Result
+  const [quizSelection, setQuizSelection] = useState(null); // 'mern' or 'python'
+  const [isRunning, setIsRunning] = useState(false);
+  const [runOutput, setRunOutput] = useState('');
+
+  const handleRunCode = () => {
+    setIsRunning(true);
+    setRunOutput('Initializing runner environment...\n');
+    
+    setTimeout(() => {
+      if (activeTab === 'react') {
+        setRunOutput(prev => prev + '> npm run dev\n');
+        setTimeout(() => {
+          setRunOutput(prev => prev + '  VITE v5.4.21 ready in 204ms\n  ➜ Local: http://localhost:3000/\n');
+          setTimeout(() => {
+            setRunOutput(prev => prev + '  [Client] Click: "Enroll Now" -> setJoined(true)\n  [Client] State: Joined Cohort!\n');
+            setIsRunning(false);
+          }, 800);
+        }, 600);
+      } else if (activeTab === 'node') {
+        setRunOutput(prev => prev + '> node server.js\n');
+        setTimeout(() => {
+          setRunOutput(prev => prev + '  Express server running on port 5000\n  DB connected.\n');
+          setTimeout(() => {
+            setRunOutput(prev => prev + '  POST /api/ai-chat - 200 OK (45ms)\n  Response: { reply: "Hi from KTC!" }\n');
+            setIsRunning(false);
+          }, 800);
+        }, 600);
+      } else {
+        setRunOutput(prev => prev + '> python model.py\n');
+        setTimeout(() => {
+          setRunOutput(prev => prev + '  TensorFlow 2.15.0 loaded.\n  Training sequential classifier...\n');
+          setTimeout(() => {
+            setRunOutput(prev => prev + '  Epoch 1/3 - val_loss: 0.452 - accuracy: 96.5%\n  Model compiled. Accuracy: 98.4%\n');
+            setIsRunning(false);
+          }, 1000);
+        }, 600);
+      }
+    }, 500);
+  };
+
   const handleTestimonialChange = (newIndex) => {
     setIsFading(true);
     setTimeout(() => {
@@ -407,14 +449,14 @@ model.compile(optimizer='adam', loss='sparse_categorical')`
               <div className="relative w-full max-w-lg mx-auto flex flex-col items-center">
                 
                 {/* Floating Code Editor Mockup */}
-                <div className="absolute -top-12 -right-16 w-[310px] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-10 hidden sm:block">
+                <div className="absolute -top-12 -right-28 w-[350px] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden z-30 hidden sm:block">
                   {/* File tab switcher */}
                   <div className="flex items-center justify-between px-3 bg-slate-950 border-b border-slate-850 h-11">
                     <div className="flex gap-1.5 py-1">
                       {Object.keys(codeSnippets).map((tabKey) => (
                         <button
                           key={tabKey}
-                          onClick={() => setActiveTab(tabKey)}
+                          onClick={() => { setActiveTab(tabKey); setRunOutput(''); }}
                           className={`px-2.5 py-1 rounded-md text-[10px] font-bold font-mono flex items-center gap-1 transition-all ${
                             activeTab === tabKey 
                               ? 'bg-slate-800 text-white shadow-sm border border-slate-700/40' 
@@ -422,28 +464,64 @@ model.compile(optimizer='adam', loss='sparse_categorical')`
                           }`}
                         >
                           {tabKey === 'react' && (
-                            <svg className="w-3.5 h-3.5 text-[#61dafb] animate-spin" style={{ animationDuration: '8s' }} viewBox="0 0 100 100" fill="currentColor">
-                              <path d="M50 38.6c-6.8 0-12.3 5.5-12.3 12.3s5.5 12.3 12.3 12.3 12.3-5.5 12.3-12.3-5.5-12.3-12.3-12.3zm0 21.6c-5.1 0-9.3-4.2-9.3-9.3s4.2-9.3 9.3-9.3 9.3 4.2 9.3 9.3-4.2 9.3-9.3 9.3z" />
-                              <path d="M96.7 46.8c-.8-5.3-3.6-10-7.8-13.4-4-3.2-9-5-14.3-5.2-1.9 0-3.8.2-5.7.5C64.6 23.4 57.5 20 50 20s-14.6 3.4-18.9 8.7c-1.9-.3-3.8-.5-5.7-.5-5.3.2-10.3 2-14.3 5.2-4.2 3.4-7 8.1-7.8 13.4-.6 3.9-.3 7.8 1 11.5-.7 1.8-1.2 3.8-1.5 5.7-.2 5.3 1.6 10.3 4.8 14.3 3.4 4.2 8.1 7 13.4 7.8 1.8.2 3.6.3 5.4.3 1.5 0 3-.1 4.5-.3C40.6 86.6 47.7 90 50 90s9.4-3.4 13.7-8.7c1.5.2 3 .3 4.5.3 1.8 0 3.6-.1 5.4-.3 5.3-.8 10-3.6 13.4-7.8 3.2-4 5-9 5.2-14.3-.3-1.9-.8-3.9-1.5-5.7 1.3-3.7 1.6-7.6 1-11.5V46.8z" opacity=".2" />
+                            <svg className="w-3.5 h-3.5 text-[#0dbbb5] animate-spin" style={{ animationDuration: '8s' }} viewBox="0 0 100 100" fill="currentColor">
+                              <circle cx="50" cy="50" r="8" fill="#0dbbb5" />
+                              <g stroke="#0dbbb5" strokeWidth="4.5" fill="none">
+                                <ellipse rx="38" ry="14.5" transform="translate(50, 50)" />
+                                <ellipse rx="38" ry="14.5" transform="translate(50, 50) rotate(60)" />
+                                <ellipse rx="38" ry="14.5" transform="translate(50, 50) rotate(120)" />
+                              </g>
                             </svg>
                           )}
                           {codeSnippets[tabKey].name}
                         </button>
                       ))}
                     </div>
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+                    
+                    {/* Run Action Trigger & Indicators */}
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={handleRunCode}
+                        disabled={isRunning}
+                        className={`px-2 py-0.5 rounded text-[8px] font-mono font-bold uppercase tracking-wider transition-all flex items-center gap-0.5 border ${
+                          isRunning 
+                            ? 'bg-slate-800 text-slate-500 border-slate-700 cursor-not-allowed'
+                            : 'bg-emerald-600 hover:bg-emerald-700 text-white border-emerald-500 shadow-sm active:scale-95'
+                        }`}
+                      >
+                        <span className="material-symbols-outlined text-[10px] font-black">play_arrow</span>
+                        {isRunning ? 'Running' : 'Run'}
+                      </button>
+                      <div className="flex gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-red-500/80"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-500/80"></span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-500/80"></span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Code Area with Syntax Highlighting */}
-                  <div className="p-5 font-mono text-[10px] text-slate-300 bg-slate-950 leading-relaxed min-h-[175px] max-h-[175px] overflow-y-auto">
-                    <pre 
-                      className="whitespace-pre text-left" 
-                      dangerouslySetInnerHTML={{ __html: highlightCode(codeSnippets[activeTab].code) }}
-                    />
+                  {/* Code Area with Syntax Highlighting & Console Overlay */}
+                  <div className="relative font-mono text-[10px] text-slate-300 bg-slate-950 leading-relaxed min-h-[175px] max-h-[175px] overflow-y-auto flex flex-col justify-between">
+                    <div className="p-5">
+                      <pre 
+                        className="whitespace-pre text-left" 
+                        dangerouslySetInnerHTML={{ __html: highlightCode(codeSnippets[activeTab].code) }}
+                      />
+                    </div>
+
+                    {/* Console Output Overlap inside Editor */}
+                    {runOutput && (
+                      <div className="sticky bottom-0 left-0 right-0 border-t border-slate-900 bg-slate-950 p-4 text-left font-mono text-[8px] leading-relaxed text-emerald-400 border-t border-slate-850/80 animate-fade-in-up z-20 shadow-lg">
+                        <div className="flex justify-between items-center text-slate-500 pb-1 border-b border-slate-900 mb-1">
+                          <span className="font-bold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            Terminal Output
+                          </span>
+                          <button onClick={() => setRunOutput('')} className="hover:text-slate-350 text-[8px] font-bold">Clear</button>
+                        </div>
+                        <pre className="whitespace-pre-wrap">{runOutput}</pre>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -602,6 +680,102 @@ model.compile(optimizer='adam', loss='sparse_categorical')`
             <span className="text-blue-600 font-mono text-sm font-bold uppercase tracking-widest">LIVE BOOTCAMPS</span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900">Choose Your Path</h2>
             <p className="text-slate-500 max-w-xl mx-auto text-sm">Gain production experience with active code guidance on Zoom &amp; Google Meet.</p>
+          </div>
+
+          {/* Interactive Course Path Finder Quiz */}
+          <div className="max-w-xl mx-auto mb-16 bg-slate-50 border border-slate-100 rounded-3xl p-6 md:p-8 shadow-sm text-left">
+            {quizStep === 0 && (
+              <div className="text-center space-y-4">
+                <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto shadow-inner">
+                  <span className="material-symbols-outlined text-2xl">route</span>
+                </div>
+                <h3 className="text-lg font-black text-slate-900">Confused which path is right for you?</h3>
+                <p className="text-slate-500 text-xs leading-relaxed font-semibold max-w-sm mx-auto">
+                  Answer a quick question and our interactive pathfinder will match you with the ideal cohort curriculum.
+                </p>
+                <button
+                  onClick={() => setQuizStep(1)}
+                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm active:scale-95"
+                >
+                  Start Path Finder Quiz
+                </button>
+              </div>
+            )}
+
+            {quizStep === 1 && (
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-[10px] font-mono text-slate-400 font-bold uppercase">
+                  <span>Question 1 of 1</span>
+                  <span>Select Goal</span>
+                </div>
+                <h3 className="text-sm font-extrabold text-slate-900">What are you most excited to build in your tech career?</h3>
+                
+                <div className="grid gap-3">
+                  <button
+                    onClick={() => {
+                      setQuizSelection('mern');
+                      setQuizStep(2);
+                    }}
+                    className="p-4 rounded-xl border border-slate-200 hover:border-blue-500 bg-white text-left hover:bg-blue-50/20 transition-all flex items-start gap-3"
+                  >
+                    <span className="material-symbols-outlined text-blue-600 text-lg shrink-0 mt-0.5">web</span>
+                    <div>
+                      <div className="text-xs font-bold text-slate-800">MERN Full Stack Applications</div>
+                      <div className="text-[10px] text-slate-400 font-medium mt-0.5">Build user authentication, API layers, Mongo databases, and pixel-perfect SaaS pages.</div>
+                    </div>
+                  </button>
+                  
+                  <button
+                    onClick={() => {
+                      setQuizSelection('python');
+                      setQuizStep(2);
+                    }}
+                    className="p-4 rounded-xl border border-slate-200 hover:border-purple-500 bg-white text-left hover:bg-purple-50/20 transition-all flex items-start gap-3"
+                  >
+                    <span className="material-symbols-outlined text-purple-600 text-lg shrink-0 mt-0.5">smart_toy</span>
+                    <div>
+                      <div className="text-xs font-bold text-slate-800">Python, Machine Learning &amp; AI Agents</div>
+                      <div className="text-[10px] text-slate-400 font-medium mt-0.5">Wrangle datasets with Pandas, train prediction models, and orchestrate intelligent AI agent systems.</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {quizStep === 2 && (
+              <div className="space-y-5 text-center">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto shadow-inner bg-emerald-50 text-emerald-600">
+                  <span className="material-symbols-outlined text-2xl">verified</span>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-widest">// RECOMMENDED PATH MATCH</span>
+                  <h3 className="text-base font-extrabold text-slate-900">
+                    {quizSelection === 'mern' ? 'MERN Stack with AI Bootcamp' : 'Python with AI, ML & Data Science'}
+                  </h3>
+                  <p className="text-slate-500 text-xs leading-relaxed max-w-sm mx-auto font-medium">
+                    {quizSelection === 'mern'
+                      ? 'Based on your goal to construct SaaS products and full stack portals, you matched with the 12-week intensive MERN Web Development cohort.'
+                      : 'Based on your interest in data science and AI models, you matched with the comprehensive Python developer cohort.'}
+                  </p>
+                </div>
+                <div className="flex gap-3 justify-center">
+                  <button
+                    onClick={() => setQuizStep(0)}
+                    className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-600 font-bold text-xs rounded-xl transition-all"
+                  >
+                    Restart Quiz
+                  </button>
+                  <Link
+                    to={quizSelection === 'mern' ? '/courses/mern-with-ai' : '/courses/python-with-ai'}
+                    className={`px-5 py-2 text-white font-bold text-xs rounded-xl transition-all active:scale-95 ${
+                      quizSelection === 'mern' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-purple-600 hover:bg-purple-700'
+                    }`}
+                  >
+                    View Curriculum
+                  </Link>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">

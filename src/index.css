@@ -8,7 +8,7 @@ html {
 }
 
 body {
-  background-color: #fafbfc;
+  background-color: #ffffff;
   color: #1e293b;
 }
 
@@ -20,7 +20,7 @@ body {
 
 /* ===== Gradient Text ===== */
 .gradient-text {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #0f172a 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #06b6d4 50%, #0f766e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -29,15 +29,15 @@ body {
 /* ===== Animated Hero Background ===== */
 .hero-gradient {
   background: 
-    radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 10% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(13, 148, 136, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 100%);
-  background-color: #f8fafc;
+  background-color: #ffffff;
 }
 
 /* ===== Technical Grid ===== */
 .technical-grid {
-  background-image: radial-gradient(circle, rgba(14, 165, 233, 0.12) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(6, 182, 212, 0.12) 1px, transparent 1px);
   background-size: 24px 24px;
 }
 
@@ -66,8 +66,8 @@ body {
 }
 
 .bento-card:hover {
-  border-color: rgba(14, 165, 233, 0.3);
-  box-shadow: 0px 12px 30px rgba(14, 165, 233, 0.08);
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0px 12px 30px rgba(6, 182, 212, 0.08);
   transform: translateY(-4px);
 }
 
@@ -77,15 +77,15 @@ body {
 }
 
 @keyframes pulse {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.4); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(14, 165, 233, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
 }
 
 .live-pulse {
   width: 8px;
   height: 8px;
-  background-color: #0284c7;
+  background-color: #0d9488;
   border-radius: 50%;
   animation: pulse-live 1.5s infinite;
 }
@@ -114,7 +114,7 @@ body {
   content: '';
   position: absolute;
   inset: -1px;
-  background: linear-gradient(135deg, rgba(14, 165, 233, 0.4) 0%, rgba(56, 189, 248, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.4) 0%, rgba(6, 182, 212, 0.1) 100%);
   border-radius: inherit;
   z-index: -1;
   opacity: 0;
@@ -184,11 +184,11 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -10px rgba(14, 165, 233, 0.15);
+  box-shadow: 0 12px 24px -10px rgba(6, 182, 212, 0.15);
 }
 
 .step-number {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  background: linear-gradient(135deg, #0d9488 0%, #06b6d4 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -222,12 +222,12 @@ body {
 
 /* ===== Custom Hover Glows ===== */
 .hover-glow-blue:hover {
-  box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.25), 0 0 20px rgba(59, 130, 246, 0.15);
-  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.25), 0 0 20px rgba(13, 148, 136, 0.15);
+  border-color: rgba(13, 148, 136, 0.4);
 }
 .hover-glow-purple:hover {
-  box-shadow: 0 10px 30px -5px rgba(168, 85, 247, 0.25), 0 0 20px rgba(168, 85, 247, 0.15);
-  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 10px 30px -5px rgba(13, 148, 136, 0.25), 0 0 20px rgba(13, 148, 136, 0.15);
+  border-color: rgba(13, 148, 136, 0.4);
 }
 .glass-container {
   background: rgba(255, 255, 255, 0.7);
@@ -238,7 +238,7 @@ body {
 
 /* ===== CTA Gradient Banner ===== */
 .cta-banner {
-  background: linear-gradient(-45deg, #0284c7, #0369a1, #7c3aed, #3b82f6);
+  background: linear-gradient(-45deg, #0d9488, #06b6d4, #14b8a6, #0e7490);
   background-size: 400% 400%;
   animation: gradient-shift 8s ease infinite;
 }
@@ -257,8 +257,8 @@ body {
 }
 .mentor-card:hover {
   transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
-  box-shadow: 0 20px 40px -12px rgba(14, 165, 233, 0.18), 0 0 24px rgba(14, 165, 233, 0.08);
-  border-color: rgba(14, 165, 233, 0.35);
+  box-shadow: 0 20px 40px -12px rgba(6, 182, 212, 0.18), 0 0 24px rgba(6, 182, 212, 0.08);
+  border-color: rgba(6, 182, 212, 0.35);
 }
 
 /* ===== Portfolio Card Overlay ===== */
@@ -291,7 +291,7 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, #0284c7, #7c3aed);
+  background: linear-gradient(180deg, #0d9488, #06b6d4);
   transform: translateX(-50%);
 }
 
@@ -372,4 +372,13 @@ body {
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* ===== Technical Grid Background Overlay ===== */
+.technical-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(13, 148, 136, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 148, 136, 0.04) 1px, transparent 1px);
+}
+
 

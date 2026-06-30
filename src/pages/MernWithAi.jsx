@@ -104,6 +104,13 @@ function MernWithAi() {
     setCheckoutStep('success');
   };
 
+  const mernProjects = [
+    { week: 'Weeks 1-3', title: 'Developer Portfolio & Command Center', tech: 'HTML5, CSS3, JS Engine, Git', desc: 'Build and deploy a responsive developer portfolio page hosted on Vercel, integrating GitHub API hooks to show your real-time commits.' },
+    { week: 'Weeks 4-6', title: 'REST API Database Layer (E-Commerce)', tech: 'Node.js, Express, MongoDB, JWT', desc: 'Code a full backend layer with authentication routes, password salting, product search filters, and database schemas.' },
+    { week: 'Weeks 7-9', title: 'Responsive SaaS User Dashboard', tech: 'React, Tailwind, Redux Toolkit', desc: 'Construct a state-driven developer panel with active graphs, responsive tables, dark-mode toggle, and mock data analytics.' },
+    { week: 'Weeks 10-12', title: 'AI Assistant SaaS (Gemini Integration)', tech: 'Full Stack MERN + Gemini API', desc: 'Integrate Generative AI prompt bindings, create chat histories stored in MongoDB, and deploy the application live on production servers.' }
+  ];
+
   const modules = [
     {
       num: '01',
@@ -346,6 +353,39 @@ function MernWithAi() {
         </div>
       </section>
 
+      {/* Portfolio Projects Showcase */}
+      <section className="py-20 bg-slate-50 border-t border-b border-slate-100">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="text-center mb-16 space-y-3">
+            <span className="text-blue-600 font-mono text-sm font-bold uppercase tracking-widest">CAPSTONE BUILDS</span>
+            <h2 className="text-3xl font-extrabold text-slate-900">4 High-Impact Portfolio Projects</h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm font-medium">We build production SaaS products — no toy calculator apps. Build, host, and deploy these projects during the bootcamp.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
+            {mernProjects.map((project, idx) => (
+              <div key={idx} className="bg-white p-6 md:p-8 rounded-3xl border border-slate-150 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+                <div className="absolute top-0 right-0 bg-blue-50 text-blue-600 px-4 py-1.5 rounded-bl-2xl text-[10px] font-mono font-bold tracking-wide">
+                  {project.week}
+                </div>
+                
+                <div className="space-y-4 pt-2">
+                  <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center shadow-inner">
+                    <span className="material-symbols-outlined text-xl">folder_zip</span>
+                  </div>
+                  
+                  <div>
+                    <span className="font-mono text-[9px] font-bold text-blue-650 uppercase tracking-widest">{project.tech}</span>
+                    <h3 className="text-lg font-black text-slate-900 mt-1.5 mb-2">{project.title}</h3>
+                    <p className="text-slate-500 text-xs leading-relaxed font-semibold">{project.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Daily Cohort Schedule */}
       <section className="py-20 bg-slate-50 border-t border-b border-slate-100 relative z-10">
         <div className="max-w-container-max mx-auto px-4 md:px-gutter">
@@ -376,6 +416,85 @@ function MernWithAi() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Student Portal Preview */}
+      <section className="py-20 bg-white border-b border-slate-100">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="text-center mb-16 space-y-3">
+            <span className="text-blue-600 font-mono text-sm font-bold uppercase tracking-widest">STUDENT EXPERIENCE</span>
+            <h2 className="text-3xl font-extrabold text-slate-900">Your Student Learning Portal</h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm font-medium">A mock preview of our student portal, where you access live links, calendar invites, and daily slides.</p>
+          </div>
+
+          <div className="bg-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-xl max-w-3xl mx-auto border border-slate-800 text-left">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-6 mb-6">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wide">ACTIVE COHORT LEVEL // WEEK 4</span>
+                <h3 className="text-xl font-black text-white mt-1">MERN &amp; React Development</h3>
+              </div>
+              <div className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-3.5 py-1.5 rounded-full border border-emerald-500/20 text-xs font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                LIVE CALL IN PROGRESS
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-12 gap-8">
+              {/* Left side: upcoming call card */}
+              <div className="md:col-span-7 bg-slate-950 border border-slate-850 p-6 rounded-2xl space-y-6">
+                <div className="space-y-2">
+                  <div className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest">TODAY'S LECTURE</div>
+                  <h4 className="text-base font-extrabold text-white">Component Architecture &amp; Client State</h4>
+                  <p className="text-slate-400 text-xs leading-relaxed font-semibold">Master react state hooks, unidirectional parent-child data paths, and controlled forms validation.</p>
+                </div>
+
+                <div className="flex gap-3 flex-wrap">
+                  <a
+                    href="https://meet.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-md"
+                  >
+                    <span className="material-symbols-outlined text-sm font-black">video_call</span>
+                    Join Google Meet
+                  </a>
+                  <a
+                    href="https://discord.gg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 bg-slate-800 hover:bg-slate-750 text-slate-350 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all border border-slate-700"
+                  >
+                    <span className="material-symbols-outlined text-sm font-black">forum</span>
+                    Private Discord
+                  </a>
+                </div>
+              </div>
+
+              {/* Right side: slides/homework tasks list */}
+              <div className="md:col-span-5 space-y-5">
+                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Today's Class Assets</h4>
+                
+                <div className="space-y-3">
+                  {[
+                    { name: 'Lecture Slides (PDF)', type: 'download', icon: 'description' },
+                    { name: 'GitHub Code Template', type: 'link', icon: 'code_blocks' },
+                    { name: 'Assignment: User Grid', type: 'submit', icon: 'assignment' }
+                  ].map((asset, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-850 hover:bg-slate-950 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-slate-500 text-lg">{asset.icon}</span>
+                        <span className="text-xs font-bold text-slate-300">{asset.name}</span>
+                      </div>
+                      <span className="material-symbols-outlined text-slate-500 text-sm font-bold cursor-pointer hover:text-white transition-colors">
+                        {asset.type === 'download' ? 'download' : asset.type === 'link' ? 'open_in_new' : 'upload_file'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -575,11 +694,7 @@ function MernWithAi() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-end pt-2 border-t border-slate-900">
-                    <div>
-                      <div className="h-6 font-serif italic text-[10px] text-slate-400">Faraz Khan</div>
-                      <div className="text-[7px] text-slate-500 font-bold uppercase tracking-wider">FOUNDER, KODETOCAREER</div>
-                    </div>
+                  <div className="flex justify-end items-end pt-2 border-t border-slate-900">
                     <div className="text-right">
                       <div className="text-[8px] font-mono text-slate-500 font-bold">ID: KTC-MERN-2026-9812</div>
                       <div className="text-[7px] text-slate-500 font-bold uppercase mt-0.5">VERIFIABLE CREDENTIAL</div>

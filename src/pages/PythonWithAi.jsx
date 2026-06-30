@@ -153,11 +153,11 @@ function PythonWithAi() {
     { name: 'Git & GitHub', desc: 'Managing codebases and portfolio history', icon: 'code' }
   ];
 
-  const projects = [
-    { num: '1', name: 'Smart Housing Market Estimator', desc: 'Multi-feature regression pipeline predicting prices using Scikit-Learn pipelines.' },
-    { num: '2', name: 'Customer Classification Hub', desc: 'K-Means clustering model for targeted digital marketing user segments.' },
-    { num: '3', name: 'RAG Document Assistant Chatbot', desc: 'Upload PDF invoices, index chunks into vector database, and query via Streamlit UI.' },
-    { num: '4', name: 'Multi-Agent Advisory Crew', desc: 'Using CrewAI agents to research market trends, summarize documents, and auto-generate newsletters.' }
+  const pythonProjects = [
+    { week: 'Weeks 1-3', title: 'Smart Housing Market Estimator', tech: 'Scikit-Learn, NumPy, Pandas', desc: 'Predict pricing valuations using multi-feature regression pipelines, validation splits, and continuous error evaluations.' },
+    { week: 'Weeks 4-6', title: 'Customer Classification Hub', tech: 'K-Means, Seaborn, Statistics', desc: 'Perform unsupervised customer profiling and cluster visual metrics to classify target buyer demographics.' },
+    { week: 'Weeks 7-9', title: 'RAG Document Assistant Chatbot', tech: 'LangChain, VectorDB, Streamlit', desc: 'Upload documents, segment chunk vectors, load embeddings into a vector database, and query details via user dashboards.' },
+    { week: 'Weeks 10-12', title: 'Multi-Agent Advisory Crew', tech: 'CrewAI Agents, LangGraph, FastAPI', desc: 'Orchestrate intelligent agents researching market analytics, drafting newsletters, and deploying endpoints.' }
   ];
 
   return (
@@ -388,7 +388,7 @@ function PythonWithAi() {
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto text-left">
             {[
               { time: '06:00 PM - 08:00 PM', title: 'Live Theory & Code-Along', desc: 'Join the Google Meet call. Interact in real-time, code along with the mentor, and explore the architectural patterns live.', icon: 'video_chat', color: 'purple' },
-              { time: '08:00 PM - 09:00 PM', title: 'Interactive Lab Work', desc: 'Immediately apply what you learned. Work on assignments, push to GitHub, and get help from tutors on voice chat.', icon: 'integration_instructions', color: 'indigo' },
+              { time: '08:05 PM - 09:00 PM', title: 'Interactive Lab Work', desc: 'Immediately apply what you learned. Work on assignments, push to GitHub, and get help from tutors on voice chat.', icon: 'integration_instructions', color: 'indigo' },
               { time: 'Weekend Support', title: '1-on-1 Code Audits', desc: 'Submit your weekly projects. Meet mentors to review your files, optimize database queries, and clear syntax doubts.', icon: 'support_agent', color: 'emerald' }
             ].map((step, idx) => (
               <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
@@ -410,22 +410,111 @@ function PythonWithAi() {
         </div>
       </section>
 
-      {/* Capstone Projects Section */}
+      {/* Student Portal Preview */}
       <section className="py-20 bg-white border-b border-slate-100">
         <div className="max-w-container-max mx-auto px-4 md:px-gutter">
           <div className="text-center mb-16 space-y-3">
-            <span className="text-purple-600 font-mono text-sm font-bold uppercase tracking-widest">PORTFOLIO BUILDS</span>
-            <h2 className="text-3xl font-extrabold text-slate-900">Build Portfolio-Ready Capstone Work</h2>
-            <p className="text-slate-500 max-w-xl mx-auto text-sm">Four projects demonstrating data wrangling, machine learning, and LangChain orchestrations.</p>
+            <span className="text-purple-600 font-mono text-sm font-bold uppercase tracking-widest">STUDENT EXPERIENCE</span>
+            <h2 className="text-3xl font-extrabold text-slate-900">Your Student Learning Portal</h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm font-medium">A mock preview of our student portal, where you access live links, calendar invites, and daily slides.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left">
-            {projects.map((proj, idx) => (
-              <div key={idx} className="bg-slate-50 border border-slate-100 p-6 rounded-2xl flex gap-4 hover:border-purple-400 transition-colors">
-                <span className="step-number font-black text-xl font-mono shrink-0">0{proj.num}</span>
-                <div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mb-1.5">{proj.name}</h4>
-                  <p className="text-xs text-slate-500 leading-relaxed font-semibold">{proj.desc}</p>
+          <div className="bg-slate-900 text-white rounded-3xl p-6 md:p-8 shadow-xl max-w-3xl mx-auto border border-slate-800 text-left">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-6 mb-6">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wide">ACTIVE COHORT LEVEL // WEEK 4</span>
+                <h3 className="text-xl font-black text-white mt-1">Python, ML &amp; AI Agent Development</h3>
+              </div>
+              <div className="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 px-3.5 py-1.5 rounded-full border border-emerald-500/20 text-xs font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                LIVE CALL IN PROGRESS
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-12 gap-8">
+              {/* Left side: upcoming call card */}
+              <div className="md:col-span-7 bg-slate-950 border border-slate-850 p-6 rounded-2xl space-y-6">
+                <div className="space-y-2">
+                  <div className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest">TODAY'S LECTURE</div>
+                  <h4 className="text-base font-extrabold text-white">Model Training, Validations &amp; Scikit-Learn</h4>
+                  <p className="text-slate-400 text-xs leading-relaxed font-semibold">Master linear models, validation splits, precision metrics, and export python kernel evaluations.</p>
+                </div>
+
+                <div className="flex gap-3 flex-wrap">
+                  <a
+                    href="https://meet.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 bg-purple-650 hover:bg-purple-705 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all shadow-md"
+                  >
+                    <span className="material-symbols-outlined text-sm font-black">video_call</span>
+                    Join Google Meet
+                  </a>
+                  <a
+                    href="https://discord.gg"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-3 bg-slate-800 hover:bg-slate-750 text-slate-350 font-bold text-xs rounded-xl flex items-center gap-1.5 transition-all border border-slate-700"
+                  >
+                    <span className="material-symbols-outlined text-sm font-black">forum</span>
+                    Private Discord
+                  </a>
+                </div>
+              </div>
+
+              {/* Right side: slides/homework tasks list */}
+              <div className="md:col-span-5 space-y-5">
+                <h4 className="text-xs font-bold text-white uppercase tracking-wider">Today's Class Assets</h4>
+                
+                <div className="space-y-3">
+                  {[
+                    { name: 'Lecture Slides (PDF)', type: 'download', icon: 'description' },
+                    { name: 'GitHub Code Template', type: 'link', icon: 'code_blocks' },
+                    { name: 'Assignment: Housing Prediction', type: 'submit', icon: 'assignment' }
+                  ].map((asset, idx) => (
+                    <div key={idx} className="flex items-center justify-between p-3 rounded-xl bg-slate-950/50 border border-slate-850 hover:bg-slate-950 transition-colors">
+                      <div className="flex items-center gap-3">
+                        <span className="material-symbols-outlined text-slate-500 text-lg">{asset.icon}</span>
+                        <span className="text-xs font-bold text-slate-300">{asset.name}</span>
+                      </div>
+                      <span className="material-symbols-outlined text-slate-500 text-sm font-bold cursor-pointer hover:text-white transition-colors">
+                        {asset.type === 'download' ? 'download' : asset.type === 'link' ? 'open_in_new' : 'upload_file'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Portfolio Projects Showcase */}
+      <section className="py-20 bg-slate-50 border-t border-b border-slate-100">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="text-center mb-16 space-y-3">
+            <span className="text-purple-600 font-mono text-sm font-bold uppercase tracking-widest">CAPSTONE BUILDS</span>
+            <h2 className="text-3xl font-extrabold text-slate-900">4 High-Impact Portfolio Projects</h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm font-medium">We build production machine learning and agent pipelines. Build, host, and deploy these projects during the bootcamp.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
+            {pythonProjects.map((project, idx) => (
+              <div key={idx} className="bg-white p-6 md:p-8 rounded-3xl border border-slate-150 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow relative overflow-hidden group">
+                <div className="absolute top-0 right-0 bg-purple-50 text-purple-650 px-4 py-1.5 rounded-bl-2xl text-[10px] font-mono font-bold tracking-wide">
+                  {project.week}
+                </div>
+                
+                <div className="space-y-4 pt-2">
+                  <div className="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center shadow-inner">
+                    <span className="material-symbols-outlined text-xl">folder_zip</span>
+                  </div>
+                  
+                  <div>
+                    <span className="font-mono text-[9px] font-bold text-purple-650 uppercase tracking-widest">{project.tech}</span>
+                    <h3 className="text-lg font-black text-slate-900 mt-1.5 mb-2">{project.title}</h3>
+                    <p className="text-slate-500 text-xs leading-relaxed font-semibold">{project.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -601,11 +690,7 @@ function PythonWithAi() {
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-end pt-2 border-t border-slate-900">
-                    <div>
-                      <div className="h-6 font-serif italic text-[10px] text-slate-400">Faraz Khan</div>
-                      <div className="text-[7px] text-slate-500 font-bold uppercase tracking-wider">FOUNDER, KODETOCAREER</div>
-                    </div>
+                  <div className="flex justify-end items-end pt-2 border-t border-slate-900">
                     <div className="text-right">
                       <div className="text-[8px] font-mono text-slate-500 font-bold">ID: KTC-PYTH-2026-8843</div>
                       <div className="text-[7px] text-slate-500 font-bold uppercase mt-0.5">VERIFIABLE CREDENTIAL</div>
