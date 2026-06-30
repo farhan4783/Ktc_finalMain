@@ -39,6 +39,49 @@ function PythonWithAi() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [sandboxAction, setSandboxAction] = useState('pandas');
+  const [sandboxLoading, setSandboxLoading] = useState(false);
+  const [sandboxLogs, setSandboxLogs] = useState({
+    url: 'df = pd.read_csv("sales.csv")',
+    status: 'COMPLETED',
+    time: '85ms',
+    request: '# Load & Summarize Data Profile\nimport pandas as pd\ndf = pd.read_csv("sales.csv")\nprint(df.shape)\nprint(df.groupby("region")["revenue"].sum())',
+    response: 'Shape: (5000, 8)\nRegion   Revenue\nNorth    ₹1,24,000\nSouth    ₹3,10,000\nEast     ₹1,85,000\nWest     ₹2,90,000\nName: revenue, dtype: float64'
+  });
+
+  const triggerSandbox = (action) => {
+    setSandboxAction(action);
+    setSandboxLoading(true);
+    setTimeout(() => {
+      setSandboxLoading(false);
+      if (action === 'pandas') {
+        setSandboxLogs({
+          url: 'df = pd.read_csv("sales.csv")',
+          status: 'COMPLETED',
+          time: '85ms',
+          request: '# Load & Summarize Data Profile\nimport pandas as pd\ndf = pd.read_csv("sales.csv")\nprint(df.shape)\nprint(df.groupby("region")["revenue"].sum())',
+          response: 'Shape: (5000, 8)\nRegion   Revenue\nNorth    ₹1,24,000\nSouth    ₹3,10,000\nEast     ₹1,85,000\nWest     ₹2,90,000\nName: revenue, dtype: float64'
+        });
+      } else if (action === 'ml') {
+        setSandboxLogs({
+          url: 'model.fit(X_train, y_train)',
+          status: 'COMPLETED',
+          time: '240ms',
+          request: '# Train Random Forest Classifier\nfrom sklearn.ensemble import RandomForestClassifier\nmodel = RandomForestClassifier(n_estimators=100)\nmodel.fit(X_train, y_train)\nprint("Accuracy:", model.score(X_test, y_test))',
+          response: 'Training 100 decision trees...\nEnsemble converged successfully.\nAccuracy: 0.9482 (94.8% test set prediction accuracy)'
+        });
+      } else if (action === 'langchain') {
+        setSandboxLogs({
+          url: 'agent_executor.invoke({"input": "query"})',
+          status: 'COMPLETED',
+          time: '680ms',
+          request: '# Invoke LangChain AI Agent\nfrom langchain.agents import initialize_agent\nagent = initialize_agent(tools, llm, agent="zero-shot-react-description")\nprint(agent.run("List active users from database"))',
+          response: 'Thought: I need to access the database tools.\nAction: sql_db_list_tables\nAction Input: ""\nObservation: Users, Logs, Invoices\nThought: I will query the Users table.\nFinal Answer: There are currently 2,450 active users.'
+        });
+      }
+    }, 600);
+  };
+
   const handleEnrollClick = (e) => {
     e.preventDefault();
     const message = "Hi, I want to enroll in the Python with AI Course. Please guide me with the payment and batch details.";
@@ -386,6 +429,99 @@ function PythonWithAi() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Python Sandbox / Code Playground */}
+      <section className="py-20 bg-white border-b border-slate-100 relative z-10">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="grid md:grid-cols-12 gap-12 items-center max-w-5xl mx-auto">
+            
+            {/* Left description column */}
+            <div className="md:col-span-5 text-left space-y-6">
+              <span className="text-purple-600 font-mono text-xs font-bold uppercase tracking-widest">// PYTHON IN ACTION</span>
+              <h2 className="text-3xl font-extrabold text-slate-900 leading-tight">Interactive AI &amp; Data Pipeline Simulator</h2>
+              <p className="text-slate-650 text-sm leading-relaxed font-semibold">
+                Don't just read syntax. Run simulated Python cells containing real pandas, scikit-learn, and LangChain model scripts to see how data structures are calculated and processed.
+              </p>
+              
+              <div className="flex flex-col gap-3 pt-2">
+                {[
+                  { id: 'pandas', label: 'df.groupby("region")["revenue"].sum()', desc: 'Aggregate sales data dynamically' },
+                  { id: 'ml', label: 'RandomForestClassifier.fit()', desc: 'Train a machine learning predictor' },
+                  { id: 'langchain', label: 'agent_executor.run()', desc: 'Run a LangChain reasoning agent' }
+                ].map((act) => (
+                  <button
+                    key={act.id}
+                    onClick={() => triggerSandbox(act.id)}
+                    disabled={sandboxLoading}
+                    className={`w-full p-4 rounded-xl border text-left transition-all flex flex-col gap-1 ${
+                      sandboxAction === act.id
+                        ? 'border-purple-500 bg-purple-50/50 shadow-sm ring-1 ring-purple-500/20'
+                        : 'border-slate-150 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span className="font-mono text-xs font-bold text-slate-800">{act.label}</span>
+                    <span className="text-[10px] text-slate-500 font-medium">{act.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Terminal Sandbox Mockup */}
+            <div className="md:col-span-7">
+              <div className="bg-slate-900 rounded-2xl shadow-xl border border-slate-800 text-left overflow-hidden flex flex-col min-h-[350px]">
+                {/* Window header */}
+                <div className="bg-slate-950 px-4 py-3 flex items-center justify-between border-b border-slate-900">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                  </div>
+                  <span className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-wider">JUPYTER_KERNEL.LOG</span>
+                  <div className="w-14"></div>
+                </div>
+                
+                {/* Console Log Contents */}
+                <div className="p-5 font-mono text-[11px] text-slate-400 space-y-4 flex-grow flex flex-col justify-between">
+                  {sandboxLoading ? (
+                    <div className="flex-grow flex flex-col items-center justify-center py-12 space-y-3">
+                      <div className="w-8 h-8 rounded-full border-2 border-purple-500 border-t-transparent animate-spin"></div>
+                      <span className="text-slate-500 text-[10px] uppercase font-bold tracking-widest animate-pulse">Executing code...</span>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Req Block */}
+                      <div className="space-y-1.5">
+                        <div className="text-[10px] text-slate-500 font-bold uppercase">// INPUT PYTHON CELL</div>
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-purple-400 font-bold">{sandboxLogs.url}</span>
+                        </div>
+                        <pre className="bg-slate-950 p-3 rounded-lg text-slate-350 border border-slate-900 max-h-[120px] overflow-y-auto whitespace-pre-wrap">
+                          {sandboxLogs.request}
+                        </pre>
+                      </div>
+                      
+                      {/* Res Block */}
+                      <div className="space-y-1.5 pt-2 border-t border-slate-850/50">
+                        <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase">
+                          <span>// STDOUT OUTPUT</span>
+                          <div className="flex items-center gap-2 text-[9px]">
+                            <span className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded font-mono font-bold">{sandboxLogs.status}</span>
+                            <span className="text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded">{sandboxLogs.time}</span>
+                          </div>
+                        </div>
+                        <pre className="bg-slate-950 p-3 rounded-lg text-slate-200 border border-slate-900 max-h-[150px] overflow-y-auto whitespace-pre-wrap">
+                          {sandboxLogs.response}
+                        </pre>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </section>

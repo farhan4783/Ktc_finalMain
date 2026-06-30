@@ -39,6 +39,54 @@ function MernWithAi() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
+  const [sandboxAction, setSandboxAction] = useState('register');
+  const [sandboxLoading, setSandboxLoading] = useState(false);
+  const [sandboxLogs, setSandboxLogs] = useState({
+    url: 'POST /api/auth/register',
+    status: '200 OK',
+    time: '45ms',
+    request: JSON.stringify({ email: 'student@kodetocareer.com', name: 'Faraz Khan' }, null, 2),
+    response: JSON.stringify({ success: true, message: 'User registered successfully. Welcome to KodeToCareer!' }, null, 2)
+  });
+
+  const triggerSandbox = (action) => {
+    setSandboxAction(action);
+    setSandboxLoading(true);
+    setTimeout(() => {
+      setSandboxLoading(false);
+      if (action === 'register') {
+        setSandboxLogs({
+          url: 'POST /api/auth/register',
+          status: '200 OK',
+          time: '45ms',
+          request: JSON.stringify({ email: 'student@kodetocareer.com', name: 'Faraz Khan' }, null, 2),
+          response: JSON.stringify({ success: true, message: 'User registered successfully. Welcome to KodeToCareer!' }, null, 2)
+        });
+      } else if (action === 'products') {
+        setSandboxLogs({
+          url: 'GET /api/products',
+          status: '200 OK',
+          time: '18ms',
+          request: 'Empty (Query Params: limit=2)',
+          response: JSON.stringify([
+            { id: 101, name: 'SaaS Dashboard Pro', price: '₹4,500' },
+            { id: 102, name: 'AI Image Generator', price: '₹12,000' }
+          ], null, 2)
+        });
+      } else if (action === 'aichat') {
+        setSandboxLogs({
+          url: 'POST /api/ai-chat',
+          status: '200 OK',
+          time: '340ms',
+          request: JSON.stringify({ prompt: 'Generate an API schema for my user database' }, null, 2),
+          response: JSON.stringify({
+            reply: 'Here is your mongoose user schema:\nconst userSchema = new mongoose.Schema({\n  name: String,\n  email: { type: String, unique: true },\n  createdAt: Date\n});'
+          }, null, 2)
+        });
+      }
+    }, 600);
+  };
+
   const handleEnrollClick = (e) => {
     e.preventDefault();
     const message = "Hi, I want to enroll in the MERN Stack with AI Course. Please guide me with the payment and batch details.";
@@ -328,6 +376,101 @@ function MernWithAi() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Code Playground / Sandbox */}
+      <section className="py-20 bg-white border-b border-slate-100 relative z-10">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="grid md:grid-cols-12 gap-12 items-center max-w-5xl mx-auto">
+            
+            {/* Left description column */}
+            <div className="md:col-span-5 text-left space-y-6">
+              <span className="text-blue-600 font-mono text-xs font-bold uppercase tracking-widest">// TRY IT LIVE</span>
+              <h2 className="text-3xl font-extrabold text-slate-900 leading-tight">Interactive Backend API Simulator</h2>
+              <p className="text-slate-650 text-sm leading-relaxed font-semibold">
+                We don't just write HTML; we build production backend layers. Click the buttons below to fire mock HTTP requests to a simulated REST server and observe real-time database transactions.
+              </p>
+              
+              <div className="flex flex-col gap-3 pt-2">
+                {[
+                  { id: 'register', label: 'POST /api/auth/register', desc: 'Create a new user document in MongoDB' },
+                  { id: 'products', label: 'GET /api/products', desc: 'Query and paginate from products catalog' },
+                  { id: 'aichat', label: 'POST /api/ai-chat', desc: 'Invoke Gemini GenAI model controller' }
+                ].map((act) => (
+                  <button
+                    key={act.id}
+                    onClick={() => triggerSandbox(act.id)}
+                    disabled={sandboxLoading}
+                    className={`w-full p-4 rounded-xl border text-left transition-all flex flex-col gap-1 ${
+                      sandboxAction === act.id
+                        ? 'border-blue-500 bg-blue-50/50 shadow-sm ring-1 ring-blue-500/20'
+                        : 'border-slate-150 hover:bg-slate-50'
+                    }`}
+                  >
+                    <span className="font-mono text-xs font-bold text-slate-800">{act.label}</span>
+                    <span className="text-[10px] text-slate-500 font-medium">{act.desc}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Terminal Sandbox Mockup */}
+            <div className="md:col-span-7">
+              <div className="bg-slate-900 rounded-2xl shadow-xl border border-slate-800 text-left overflow-hidden flex flex-col min-h-[350px]">
+                {/* Window header */}
+                <div className="bg-slate-950 px-4 py-3 flex items-center justify-between border-b border-slate-900">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                    <span className="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                  </div>
+                  <span className="font-mono text-[10px] text-slate-500 font-bold uppercase tracking-wider">REST-CLIENT.LOG</span>
+                  <div className="w-14"></div>
+                </div>
+                
+                {/* Console Log Contents */}
+                <div className="p-5 font-mono text-[11px] text-slate-400 space-y-4 flex-grow flex flex-col justify-between">
+                  {sandboxLoading ? (
+                    <div className="flex-grow flex flex-col items-center justify-center py-12 space-y-3">
+                      <div className="w-8 h-8 rounded-full border-2 border-blue-500 border-t-transparent animate-spin"></div>
+                      <span className="text-slate-500 text-[10px] uppercase font-bold tracking-widest animate-pulse">Running request...</span>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Req Block */}
+                      <div className="space-y-1.5">
+                        <div className="text-[10px] text-slate-500 font-bold uppercase">// REQUEST INFO</div>
+                        <div className="flex items-center gap-2.5">
+                          <span className="text-blue-400 font-bold">{sandboxLogs.url}</span>
+                          <span className="text-slate-600">|</span>
+                          <span className="text-slate-500">HTTP/1.1</span>
+                        </div>
+                        <pre className="bg-slate-950 p-3 rounded-lg text-slate-350 border border-slate-900 max-h-[120px] overflow-y-auto">
+                          {sandboxLogs.request}
+                        </pre>
+                      </div>
+                      
+                      {/* Res Block */}
+                      <div className="space-y-1.5 pt-2 border-t border-slate-850/50">
+                        <div className="flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase">
+                          <span>// SERVER RESPONSE</span>
+                          <div className="flex items-center gap-2 text-[9px]">
+                            <span className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded font-mono font-bold">{sandboxLogs.status}</span>
+                            <span className="text-slate-600 bg-slate-800 px-1.5 py-0.5 rounded">{sandboxLogs.time}</span>
+                          </div>
+                        </div>
+                        <pre className="bg-slate-950 p-3 rounded-lg text-slate-250 border border-slate-900 max-h-[150px] overflow-y-auto">
+                          {sandboxLogs.response}
+                        </pre>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </section>

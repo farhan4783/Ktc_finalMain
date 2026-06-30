@@ -3,6 +3,7 @@ import useSEO from '../hooks/useSEO'
 
 function About() {
   const [activeFaq, setActiveFaq] = useState(null);
+  const [faqQuery, setFaqQuery] = useState('');
 
   useSEO({
     title: 'About Us | Live Online Coding Bootcamp India — KodeToCareer',
@@ -52,13 +53,11 @@ function About() {
 
   const team = [];
 
-  const milestones = [
-    { year: '2023', title: 'KodeToCareer Founded', desc: 'Started with a mission to make quality coding education affordable and accessible for every student.' },
-    { year: '2023', title: 'First Batch Launched', desc: 'Launched the first MERN Stack bootcamp cohort with 25 students.' },
-    { year: '2024', title: '100 Students Placed', desc: 'Crossed the milestone of 100 successful placements at top tech startups and multinational firms.' },
-    { year: '2025', title: 'Python + AI Bootcamp', desc: 'Launched the Python with AI bootcamp due to overwhelming demand from students.' },
-    { year: '2025', title: '500+ Alumni Network', desc: 'Built a thriving community of 500+ alumni now working at top-tier firms.' },
-    { year: '2026', title: 'Scaling to 1000+', desc: 'Expanding our program offerings, adding advanced courses, and targeting 1000+ placements.' }
+  const studentRoadmap = [
+    { step: '01', title: 'Developer Setup & Core Foundation', desc: 'Configure VS Code, Git, and GitHub. Master basic syntax, logic building, array/object manipulation, and clean folder structures.' },
+    { step: '02', title: 'Server Architecture & APIs', desc: 'Build server entrypoints using Express.js. Learn HTTP request-response cycles, setup database models in MongoDB, and design robust REST API paths.' },
+    { step: '03', title: 'AI Integration & Production SaaS', desc: 'Connect Gemini and OpenAI APIs. Code interactive features, configure environment variables, and build production-grade web applications.' },
+    { step: '04', title: 'Career Prep & Job Placements', desc: 'Audit resume files, design LinkedIn profiles, perform mock interview panels, and start receiving job referrals through our corporate network.' }
   ];
 
   const techTools = [
@@ -199,31 +198,36 @@ function About() {
         </div>
       </section>
 
-      {/* Our Journey / Timeline */}
+      {/* Student Journey Roadmap */}
       <section className="py-20 bg-slate-50 border-b border-slate-200/50">
         <div className="max-w-container-max mx-auto px-4 md:px-gutter">
           <div className="text-center mb-16 space-y-3">
-            <span className="text-sky-600 font-mono text-sm font-bold uppercase tracking-widest">OUR JOURNEY</span>
-            <h2 className="text-3xl font-extrabold text-slate-900">Milestones We're Proud Of</h2>
-            <p className="text-slate-600 max-w-xl mx-auto">From a small idea to a thriving community of 500+ developers.</p>
+            <span className="text-sky-600 font-mono text-sm font-bold uppercase tracking-widest">ROADMAP</span>
+            <h2 className="text-3xl font-extrabold text-slate-900">Your Journey From Code to Career</h2>
+            <p className="text-slate-600 max-w-xl mx-auto text-sm font-medium">A structured step-by-step curriculum map designed to take you from a complete beginner to a hireable developer.</p>
           </div>
 
           <div className="relative max-w-3xl mx-auto">
             {/* Vertical Timeline Line */}
-            <div className="timeline-line"></div>
+            <div className="timeline-line hidden md:block"></div>
 
-            <div className="space-y-12">
-              {milestones.map((milestone, idx) => (
-                <div key={idx} className={`relative flex items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            <div className="space-y-12 relative z-10">
+              {studentRoadmap.map((step, idx) => (
+                <div key={idx} className={`relative flex flex-col md:flex-row items-center gap-8 ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                   {/* Dot */}
-                  <div className="timeline-dot" style={{ top: '50%', transform: 'translate(-50%, -50%)' }}></div>
+                  <div className="timeline-dot hidden md:flex items-center justify-center text-[10px] font-black text-white bg-sky-600 shadow-md shadow-sky-200/50" style={{ top: '50%', transform: 'translate(-50%, -50%)', width: '28px', height: '28px', border: '3px solid #f8fafc' }}>
+                    {step.step}
+                  </div>
                   
                   {/* Content Card */}
                   <div className={`w-full md:w-[45%] ${idx % 2 === 0 ? 'md:mr-auto md:pr-12' : 'md:ml-auto md:pl-12'}`}>
-                    <div className={`bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover stagger-${(idx % 5) + 1}`}>
-                      <span className="text-sky-600 font-mono text-xs font-black tracking-widest">{milestone.year}</span>
-                      <h4 className="text-base font-extrabold text-slate-900 mt-2 mb-2">{milestone.title}</h4>
-                      <p className="text-slate-500 text-sm leading-relaxed">{milestone.desc}</p>
+                    <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow text-left">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="md:hidden bg-sky-50 text-sky-600 font-mono text-xs font-bold px-2 py-0.5 rounded">Step {step.step}</span>
+                        <span className="hidden md:inline-block text-sky-600 font-mono text-xs font-black tracking-widest">PHASE {step.step}</span>
+                      </div>
+                      <h4 className="text-base font-extrabold text-slate-900 mb-2">{step.title}</h4>
+                      <p className="text-slate-500 text-xs leading-relaxed font-semibold">{step.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -266,31 +270,65 @@ function About() {
       {/* Frequently Asked Questions (FAQ) Section */}
       <section className="py-20 bg-slate-50 border-b border-slate-200/50">
         <div className="max-w-container-max mx-auto px-4 md:px-gutter">
-          <div className="text-center mb-16 space-y-3">
+          <div className="text-center mb-10 space-y-3">
             <span className="text-sky-600 font-mono text-sm font-bold uppercase tracking-widest">FAQs</span>
             <h2 className="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-            <p className="text-slate-600 max-w-xl mx-auto">Get answers to the most common questions about our bootcamps and classes.</p>
+            <p className="text-slate-600 max-w-xl mx-auto text-sm">Get answers to the most common questions about our bootcamps and classes.</p>
+          </div>
+
+          {/* FAQ Search Filter */}
+          <div className="max-w-xl mx-auto mb-10 text-left">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search frequently asked questions..."
+                value={faqQuery}
+                onChange={(e) => setFaqQuery(e.target.value)}
+                className="w-full pl-11 pr-4 py-3 rounded-2xl border border-slate-250 focus:border-sky-500 focus:ring-sky-500 text-sm bg-white"
+              />
+              <span className="material-symbols-outlined text-slate-400 absolute left-4 top-1/2 -translate-y-1/2 text-lg">search</span>
+              {faqQuery && (
+                <button onClick={() => setFaqQuery('')} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700">
+                  <span className="material-symbols-outlined text-base">close</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, idx) => (
-              <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
-                <button
-                  className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 hover:bg-slate-50 transition-colors"
-                  onClick={() => toggleFaq(idx)}
-                >
-                  <span className="text-sm md:text-base">{faq.q}</span>
-                  <span className={`material-symbols-outlined text-slate-400 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180 text-sky-600' : ''}`}>
-                    expand_more
-                  </span>
-                </button>
-                <div className={`transition-all duration-300 ease-in-out ${activeFaq === idx ? 'max-h-48 border-t border-slate-100' : 'max-h-0'} overflow-hidden`}>
-                  <div className="px-5 pb-5 pt-3 text-xs md:text-sm text-slate-500 leading-relaxed bg-slate-50/50">
-                    {faq.a}
+            {faqs
+              .filter(faq => 
+                faq.q.toLowerCase().includes(faqQuery.toLowerCase()) || 
+                faq.a.toLowerCase().includes(faqQuery.toLowerCase())
+              )
+              .map((faq, idx) => (
+                <div key={idx} className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-xs">
+                  <button
+                    className="w-full flex items-center justify-between p-5 text-left font-bold text-slate-800 hover:bg-slate-50 transition-colors"
+                    onClick={() => toggleFaq(idx)}
+                  >
+                    <span className="text-sm md:text-base">{faq.q}</span>
+                    <span className={`material-symbols-outlined text-slate-400 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180 text-sky-600' : ''}`}>
+                      expand_more
+                    </span>
+                  </button>
+                  <div className={`transition-all duration-300 ease-in-out ${activeFaq === idx ? 'max-h-48 border-t border-slate-100' : 'max-h-0'} overflow-hidden`}>
+                    <div className="px-5 pb-5 pt-3 text-xs md:text-sm text-slate-500 leading-relaxed bg-slate-50/50 text-left">
+                      {faq.a}
+                    </div>
                   </div>
                 </div>
+              ))}
+
+            {faqs.filter(faq => 
+              faq.q.toLowerCase().includes(faqQuery.toLowerCase()) || 
+              faq.a.toLowerCase().includes(faqQuery.toLowerCase())
+            ).length === 0 && (
+              <div className="text-center py-10 bg-white border border-slate-200 rounded-2xl max-w-xl mx-auto">
+                <span className="material-symbols-outlined text-slate-350 text-4xl mb-2">find_in_page</span>
+                <p className="text-slate-500 text-sm font-semibold">No questions found matching "{faqQuery}"</p>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>

@@ -530,6 +530,30 @@ model.compile(optimizer='adam', loss='sparse_categorical')`
         </div>
       </section>
 
+      {/* Animated Stats Section */}
+      <section className="py-12 bg-white relative z-10 border-b border-slate-100">
+        <div className="max-w-container-max mx-auto px-4 md:px-gutter">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-left">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="bg-slate-50 border border-slate-100 p-5 rounded-2xl flex items-center gap-4 hover:shadow-md transition-shadow">
+                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 ${
+                  stat.color === 'blue' ? 'bg-blue-50 text-blue-600' :
+                  stat.color === 'emerald' ? 'bg-emerald-50 text-emerald-600' :
+                  stat.color === 'purple' ? 'bg-purple-50 text-purple-650' :
+                  'bg-amber-50 text-amber-500'
+                }`}>
+                  <span className="material-symbols-outlined">{stat.icon}</span>
+                </div>
+                <div>
+                  <div className="text-2xl font-black text-slate-900 tracking-tight">{stat.value}</div>
+                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Infinite Tech Marquee Section */}
       <section className="py-8 bg-slate-50 border-t border-b border-slate-100/60 overflow-hidden relative z-10">
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-slate-50 to-transparent z-20 pointer-events-none"></div>
