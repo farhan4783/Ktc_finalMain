@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Python &amp; Artificial Intelligence - KodetoCareer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001a42",
+                    "surface-variant": "#e4e2e4",
+                    "inverse-primary": "#bec6e0",
+                    "surface-container": "#f0edef",
+                    "tertiary-container": "#0b1c30",
+                    "surface-bright": "#fcf8fa",
+                    "tertiary": "#000000",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary-container": "#75859d",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "on-primary-fixed": "#131b2e",
+                    "on-surface": "#1b1b1d",
+                    "on-primary-container": "#7c839b",
+                    "secondary": "#0058be",
+                    "inverse-surface": "#303032",
+                    "secondary-fixed": "#d8e2ff",
+                    "primary-container": "#131b2e",
+                    "primary-fixed-dim": "#bec6e0",
+                    "outline-variant": "#c6c6cd",
+                    "background": "#fcf8fa",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "error": "#ba1a1a",
+                    "on-background": "#1b1b1d",
+                    "surface-container-highest": "#e4e2e4",
+                    "surface-container-high": "#eae7e9",
+                    "surface-container-low": "#f6f3f5",
+                    "surface-dim": "#dcd9db",
+                    "inverse-on-surface": "#f3f0f2",
+                    "outline": "#76777d",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "secondary-container": "#2170e4",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-container": "#fefcff",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed": "#d3e4fe",
+                    "surface": "#fcf8fa",
+                    "on-secondary-fixed-variant": "#004395",
+                    "surface-tint": "#565e74",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-surface-variant": "#45464d",
+                    "on-error": "#ffffff",
+                    "primary": "#000000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "base": "8px",
+                    "container-max": "1280px",
+                    "section-gap-mobile": "64px",
+                    "section-gap-desktop": "120px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-mono": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "button-text": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["60px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-md": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-mono": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "button-text": ["16px", {"lineHeight": "24px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .pulse-red {
+            box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- TopNavBar -->
+<header class="bg-surface docked full-width top-0 sticky z-50 shadow-sm border-b border-outline-variant">
+<nav class="flex justify-between items-center w-full px-base md:px-gutter max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-extrabold text-primary">KodetoCareer</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-secondary font-bold border-b-2 border-secondary pb-1 transition-colors duration-200" href="#">Courses</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-body-md" href="#">Curriculum</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-body-md" href="#">Mentors</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors duration-200 font-body-md" href="#">About Us</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded font-button-text hover:opacity-80 transition-opacity">
+                Login
+            </button>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-section-gap-mobile md:pt-section-gap-desktop pb-section-gap-mobile md:pb-section-gap-desktop px-base md:px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-7 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-error rounded-full border border-error/20">
+<span class="w-2 h-2 rounded-full bg-error pulse-red"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider">Live on Google Meet</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg leading-tight">
+                        Python &amp; Artificial Intelligence - Live Interactive Program
+                    </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">
+                        Master Python programming and dive deep into Machine Learning and Generative AI fundamentals. A career-focused journey from syntax to scalable AI solutions.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-secondary text-on-secondary px-8 py-4 rounded-lg font-button-text text-lg shadow-lg hover:shadow-xl transition-all scale-100 active:scale-95">
+                            Enroll for ₹4,499
+                        </button>
+<button class="border border-primary text-primary px-8 py-4 rounded-lg font-button-text text-lg hover:bg-surface-container transition-colors">
+                            Download Syllabus
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="rounded-xl overflow-hidden border border-outline-variant shadow-xl bg-surface-container">
+<img class="w-full aspect-video object-cover" data-alt="A professional, high-end studio photograph of a modern software engineer workstation. The scene features a sleek laptop displaying complex Python code and neural network visualizations. The environment is bathed in soft, cool blue studio lighting with subtle warm orange highlights, creating a premium ed-tech aesthetic. The background is a minimalist, softly blurred modern office interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8pLzS5lzHKTUbAKhUnRV3A9nLGF0hz2ggCySs0lwpPJn6aEDcjXyLycIuAUlouGDwOjeMlUwz1KY_dZ7ooZfPbFlQfH9RR2T5X_1dk8x76OZDr0pvxec7jXagrsOLQ--pxGw6oEO9ah-_tV_OO-BFcWm7wxzXSXhauXNQGk6S00ftuTgebN6UfMueK2t2Mg3zq1Whe5IYGnuEJ5jW4194vdY-9Hi5fCDzaqB0UAxEUScwfWOfOok-IIrloR1gKQLMOvyqoybyuDI6"/>
+<div class="p-gutter space-y-4">
+<div class="flex justify-between items-center">
+<span class="font-label-mono text-label-mono text-secondary">NEXT BATCH STARTS SOON</span>
+<span class="font-label-mono text-label-mono font-bold text-on-surface">₹4,499</span>
+</div>
+<div class="flex gap-4 items-center p-4 bg-background rounded border border-outline-variant">
+<span class="material-symbols-outlined text-secondary" style="font-size: 32px;">schedule</span>
+<div>
+<p class="font-bold">8 Weeks Program</p>
+<p class="text-sm text-on-surface-variant">Weekend Live Sessions</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid Highlights -->
+<section class="bg-surface-container py-section-gap-mobile md:py-section-gap-desktop">
+<div class="px-base md:px-gutter max-w-container-max mx-auto">
+<h2 class="font-headline-md text-headline-md mb-12 text-center">Why join this program?</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary" data-icon="lab_profile">lab_profile</span>
+</div>
+<h3 class="font-bold text-xl mb-3">Hands-on Labs</h3>
+<p class="text-on-surface-variant">Apply theoretical knowledge in real-time with our cloud-based coding environments and industry projects.</p>
+</div>
+<div class="bg-white p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary" data-icon="record_voice_over">record_voice_over</span>
+</div>
+<h3 class="font-bold text-xl mb-3">Live Code-alongs</h3>
+<p class="text-on-surface-variant">Build complex AI models step-by-step with mentors who guide you through every line of code.</p>
+</div>
+<div class="bg-white p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-secondary" data-icon="workspace_premium">workspace_premium</span>
+</div>
+<h3 class="font-bold text-xl mb-3">Professional Certificate</h3>
+<p class="text-on-surface-variant">Earn a recognized certificate of completion that bridges the gap from your learning to your career.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Curriculum Accordion Style -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-base md:px-gutter max-w-container-max mx-auto">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md mb-4">Comprehensive Curriculum</h2>
+<p class="text-on-surface-variant">Four deep-dive modules designed to take you from basics to AI deployment.</p>
+</div>
+<div class="space-y-4">
+<!-- Module 1 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 bg-white hover:bg-surface-container-low transition-colors text-left" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<div class="flex items-center gap-4">
+<span class="font-label-mono text-secondary">01</span>
+<span class="font-bold text-lg">Python Foundation &amp; Syntax</span>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="p-6 border-t border-outline-variant bg-surface-bright">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Variables &amp; Data Structures
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Functional Programming
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    OOP Principles in Python
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Error Handling &amp; Debugging
+                                </li>
+</ul>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 bg-white hover:bg-surface-container-low transition-colors text-left" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<div class="flex items-center gap-4">
+<span class="font-label-mono text-secondary">02</span>
+<span class="font-bold text-lg">Data Science Libraries</span>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="p-6 border-t border-outline-variant bg-surface-bright hidden">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    NumPy for Numerical Computing
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Pandas for Data Manipulation
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Matplotlib &amp; Seaborn Visuals
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Data Cleaning Techniques
+                                </li>
+</ul>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 bg-white hover:bg-surface-container-low transition-colors text-left" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<div class="flex items-center gap-4">
+<span class="font-label-mono text-secondary">03</span>
+<span class="font-bold text-lg">Machine Learning Algorithms</span>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="p-6 border-t border-outline-variant bg-surface-bright hidden">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Supervised Learning: Regressions
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Unsupervised Learning: Clustering
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Decision Trees &amp; Random Forests
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Scikit-learn Implementation
+                                </li>
+</ul>
+</div>
+</div>
+<!-- Module 4 -->
+<div class="border border-outline-variant rounded-lg overflow-hidden">
+<button class="w-full flex items-center justify-between p-6 bg-white hover:bg-surface-container-low transition-colors text-left" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<div class="flex items-center gap-4">
+<span class="font-label-mono text-secondary">04</span>
+<span class="font-bold text-lg">Generative AI Development</span>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="p-6 border-t border-outline-variant bg-surface-bright hidden">
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Introduction to LLMs (GPT-4)
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Prompt Engineering for Devs
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    Building Apps with LangChain
+                                </li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-secondary">check_circle</span>
+                                    API Integration &amp; Deployment
+                                </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Floating-style Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-primary text-on-primary">
+<div class="px-base md:px-gutter max-w-container-max mx-auto text-center">
+<h2 class="font-display-lg text-display-lg-mobile md:text-3xl font-bold mb-6">Ready to bridge the gap from Kode to Career?</h2>
+<p class="text-body-lg mb-10 max-w-2xl mx-auto opacity-80">
+                    Secure your spot in our upcoming cohort. Limited seats available for personalized mentorship.
+                </p>
+<div class="flex flex-col md:flex-row justify-center items-center gap-6">
+<div class="text-3xl font-label-mono font-bold">₹4,499</div>
+<button class="bg-secondary text-white px-12 py-4 rounded-full font-button-text hover:scale-105 transition-transform">
+                        Enroll for ₹4,499
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary-container text-on-tertiary-container full-width">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter w-full px-base md:px-gutter max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop">
+<div class="col-span-1 md:col-span-1">
+<div class="text-headline-md font-headline-md font-bold text-on-tertiary mb-6">KodetoCareer</div>
+<p class="text-body-md font-body-md text-on-tertiary-fixed-variant">
+                    © 2024 KodetoCareer. Bridging the gap from Kode to Career.
+                </p>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-on-tertiary mb-6 uppercase tracking-widest">Programs</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">MERN with AI</a></li>
+<li><a class="text-on-tertiary font-medium transition-all duration-200 font-body-md" href="#">Python with AI</a></li>
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">Mentorship</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-on-tertiary mb-6 uppercase tracking-widest">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">About Us</a></li>
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">Privacy Policy</a></li>
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-mono text-label-mono text-on-tertiary mb-6 uppercase tracking-widest">Connect</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200 font-body-md" href="#">Contact</a></li>
+<li class="flex gap-4 mt-2">
+<a class="w-10 h-10 rounded bg-on-tertiary-fixed-variant/20 flex items-center justify-center hover:bg-on-tertiary transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant group-hover:text-tertiary-container">public</span>
+</a>
+<a class="w-10 h-10 rounded bg-on-tertiary-fixed-variant/20 flex items-center justify-center hover:bg-on-tertiary transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant group-hover:text-tertiary-container">alternate_email</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for the enroll button
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = '';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = '';
+            });
+        });
+
+        // Sticky Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-sm');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

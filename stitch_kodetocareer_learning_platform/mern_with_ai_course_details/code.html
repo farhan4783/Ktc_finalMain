@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MERN with AI | KodetoCareer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .live-dot {
+            animation: pulse-red 2s infinite;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#001a42",
+                        "surface-variant": "#e4e2e4",
+                        "inverse-primary": "#bec6e0",
+                        "surface-container": "#f0edef",
+                        "tertiary-container": "#0b1c30",
+                        "surface-bright": "#fcf8fa",
+                        "tertiary": "#000000",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "on-tertiary-container": "#75859d",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-primary-fixed": "#131b2e",
+                        "on-surface": "#1b1b1d",
+                        "on-primary-container": "#7c839b",
+                        "secondary": "#0058be",
+                        "inverse-surface": "#303032",
+                        "secondary-fixed": "#d8e2ff",
+                        "primary-container": "#131b2e",
+                        "primary-fixed-dim": "#bec6e0",
+                        "outline-variant": "#c6c6cd",
+                        "background": "#fcf8fa",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1b1d",
+                        "surface-container-highest": "#e4e2e4",
+                        "surface-container-high": "#eae7e9",
+                        "surface-container-low": "#f6f3f5",
+                        "surface-dim": "#dcd9db",
+                        "inverse-on-surface": "#f3f0f2",
+                        "outline": "#76777d",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "secondary-container": "#2170e4",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fefcff",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#d3e4fe",
+                        "surface": "#fcf8fa",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-tint": "#565e74",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-surface-variant": "#45464d",
+                        "on-error": "#ffffff",
+                        "primary": "#000000"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "8px",
+                        "container-max": "1280px",
+                        "section-gap-mobile": "64px",
+                        "section-gap-desktop": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "button-text": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["60px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "headline-md": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+                        "label-mono": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "button-text": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary selection:text-on-secondary">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none docked full-width top-0 sticky z-50">
+<div class="flex justify-between items-center w-full px-base md:px-gutter max-w-container-max mx-auto h-20">
+<div class="text-headline-md font-headline-md font-extrabold text-primary dark:text-on-primary">
+                KodetoCareer
+            </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-secondary dark:text-secondary-fixed font-bold border-b-2 border-secondary pb-1 text-body-md font-body-md" href="#">Courses</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 text-body-md font-body-md" href="#">Curriculum</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 text-body-md font-body-md" href="#">Mentors</a>
+<a class="text-on-surface-variant dark:text-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 text-body-md font-body-md" href="#">About Us</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 font-button-text text-button-text rounded-lg hover:opacity-80 transition-all">
+                Login
+            </button>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-base md:px-gutter max-w-container-max mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-error-container text-on-error-container rounded-full mb-6">
+<span class="w-2 h-2 rounded-full bg-error live-dot"></span>
+<span class="font-label-mono text-label-mono">Live on Google Meet</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6">
+                        MERN Stack with AI Integration - Live Mentorship
+                    </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 max-w-2xl">
+                        A comprehensive 12-week journey from frontend basics to advanced AI integration in MERN applications. Build production-grade software with modern LLM capabilities.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary text-on-secondary px-8 py-4 font-button-text text-button-text rounded-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-all">
+                            Enroll for ₹3,999
+                        </button>
+<button class="border border-primary text-primary px-8 py-4 font-button-text text-button-text rounded-lg hover:bg-surface-container transition-all">
+                            View Syllabus
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="rounded-xl overflow-hidden shadow-2xl border border-outline-variant relative group">
+<img class="w-full aspect-video md:aspect-square object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A cinematic, high-quality studio photograph of a modern developer workstation. On a clean wooden desk, there is a sleek laptop displaying complex React code and an AI dashboard. The room has soft ambient blue lighting with a minimalist bookshelf in the background. The atmosphere is professional, technical, and focused, reflecting a premium learning environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWfVB6J84XXZcAjofzBkFScQx8qdqEQ2DTdummGZ75acTfiJLxlbcGyOSyZoWf1jncObJd_5OYg_2bWslZUkRBIwPf22sbvRy9XnBXqKrhaweOoSPQA5aEv35edkqcii4Ju-6n-_KlAHKjJjgMiNc4X7IklRzTEVSYFt57AHGTW_Y2pIYCnBR8ivOR6ti5jK9Wbq3Z3YvnG9PV5kGWGUkudbuhzImleKxun1-TDPcyMMi2kAcvWRq5amyHVU3mQpS8nHDUmW5oL9Tz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-8">
+<div class="flex gap-4 items-center">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high"></div>
+<div class="w-10 h-10 rounded-full border-2 border-surface bg-surface-container-high"></div>
+</div>
+<span class="text-on-primary font-label-mono text-label-mono">Joined by 1,200+ students</span>
+</div>
+</div>
+</div>
+<!-- Floating Tech Pills -->
+<div class="absolute -top-4 -right-4 glass-card p-4 rounded-lg shadow-lg hidden md:block">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="auto_awesome"></span>
+<span class="font-label-mono text-label-mono text-secondary">AI Enabled</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Highlights Bento -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop bg-surface-container-low">
+<div class="px-base md:px-gutter max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-primary mb-4">Why choose this course?</h2>
+<p class="text-on-surface-variant font-body-md">Precision-engineered curriculum for the modern engineer.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Highlight 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="developer_board"></span>
+</div>
+<h3 class="font-headline-md text-[20px] mb-3">Real-time projects</h3>
+<p class="text-on-surface-variant font-body-md">Build 4 industry-level applications including a full-scale AI-powered SaaS platform.</p>
+</div>
+<!-- Highlight 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="live_help"></span>
+</div>
+<h3 class="font-headline-md text-[20px] mb-3">Live doubt clearing</h3>
+<p class="text-on-surface-variant font-body-md">Don't get stuck. Join daily office hours and get your technical questions answered instantly.</p>
+</div>
+<!-- Highlight 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:border-secondary/30 transition-all group">
+<div class="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-6 text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined" data-icon="career_exploration"></span>
+</div>
+<h3 class="font-headline-md text-[20px] mb-3">Career guidance</h3>
+<p class="text-on-surface-variant font-body-md">Resume reviews, mock interviews, and direct referral pipeline to partner startups.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Curriculum Asymmetric Layout -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-base md:px-gutter max-w-container-max mx-auto">
+<div class="flex flex-col md:flex-row gap-gutter">
+<div class="md:w-1/3">
+<div class="sticky top-32">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">The Curriculum</h2>
+<div class="h-1 w-20 bg-secondary mb-8"></div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule"></span>
+<span class="font-label-mono text-label-mono">12 WEEKS DURATION</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="video_library"></span>
+<span class="font-label-mono text-label-mono">48+ LIVE SESSIONS</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="verified"></span>
+<span class="font-label-mono text-label-mono">CERTIFICATE INCLUDED</span>
+</div>
+</div>
+</div>
+</div>
+<div class="md:w-2/3 space-y-6">
+<!-- Module 1 -->
+<div class="bg-white border border-outline-variant p-6 rounded-lg flex gap-6 hover:shadow-md transition-shadow">
+<div class="font-label-mono text-secondary text-xl opacity-20">01</div>
+<div>
+<h4 class="font-headline-md text-[18px] mb-2">MongoDB &amp; Schema Design</h4>
+<p class="text-on-surface-variant font-body-md">Master NoSQL databases, complex aggregations, and data modeling for high-performance apps.</p>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="bg-white border border-outline-variant p-6 rounded-lg flex gap-6 hover:shadow-md transition-shadow">
+<div class="font-label-mono text-secondary text-xl opacity-20">02</div>
+<div>
+<h4 class="font-headline-md text-[18px] mb-2">Express.js &amp; Node.js</h4>
+<p class="text-on-surface-variant font-body-md">Building robust REST APIs, authentication middleware, and scalable backend architecture.</p>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="bg-white border border-outline-variant p-6 rounded-lg flex gap-6 hover:shadow-md transition-shadow">
+<div class="font-label-mono text-secondary text-xl opacity-20">03</div>
+<div>
+<h4 class="font-headline-md text-[18px] mb-2">React &amp; State Management</h4>
+<p class="text-on-surface-variant font-body-md">Modern React hooks, Context API, and optimizing frontend performance for large-scale UI.</p>
+</div>
+</div>
+<!-- Module 4 -->
+<div class="bg-secondary-fixed p-6 rounded-lg flex gap-6 border border-secondary/20">
+<div class="font-label-mono text-secondary text-xl">04</div>
+<div>
+<div class="flex items-center gap-2 mb-2">
+<h4 class="font-headline-md text-[18px] text-secondary">AI Integration (OpenAI &amp; Gemini)</h4>
+<span class="bg-secondary text-on-secondary text-[10px] px-2 py-0.5 rounded font-label-mono">ADVANCED</span>
+</div>
+<p class="text-on-secondary-fixed-variant font-body-md">Integrating LLMs via APIs, prompt engineering for developers, and building AI agents in MERN.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing/CTA Card Overlay -->
+<section class="py-section-gap-mobile md:py-section-gap-desktop px-base md:px-gutter max-w-container-max mx-auto">
+<div class="bg-primary-container text-on-primary-container rounded-2xl p-8 md:p-16 relative overflow-hidden text-center md:text-left">
+<!-- Abstract BG element -->
+<div class="absolute right-0 top-0 w-1/2 h-full opacity-10 pointer-events-none hidden md:block">
+
+</div>
+<div class="relative z-10 grid md:grid-cols-2 items-center gap-12">
+<div>
+<h2 class="text-on-secondary-container font-display-lg-mobile md:font-headline-md text-display-lg-mobile md:text-headline-md mb-4">Ready to level up your career?</h2>
+<p class="text-on-primary-container font-body-lg mb-8">Join the next cohort starting next Monday. Limited seats available for personalized mentorship.</p>
+<div class="flex items-center gap-4 text-left justify-center md:justify-start">
+<div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="payments"></span>
+</div>
+<div>
+<div class="font-label-mono text-label-mono text-on-primary-container">LIMITED TIME PRICE</div>
+<div class="text-3xl font-label-mono text-white">₹3,999</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center justify-center">
+<div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm text-center">
+<div class="text-on-surface mb-6">
+<span class="text-4xl font-extrabold">₹3,999</span>
+<span class="text-on-surface-variant font-body-md"> (One-time)</span>
+</div>
+<ul class="text-left space-y-4 mb-8">
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-green-500 text-sm" data-icon="check_circle"></span>
+<span>Lifetime access to recordings</span>
+</li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-green-500 text-sm" data-icon="check_circle"></span>
+<span>Verified PDF certificate</span>
+</li>
+<li class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-green-500 text-sm" data-icon="check_circle"></span>
+<span>Exclusive Discord channel</span>
+</li>
+</ul>
+<button class="w-full bg-secondary text-on-secondary py-4 rounded-lg font-button-text text-button-text hover:bg-on-secondary-fixed-variant transition-all">
+                                Enroll for ₹3,999
+                            </button>
+<p class="mt-4 text-[12px] text-on-surface-variant">Secure Payment via Razorpay</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-tertiary-container dark:bg-tertiary-container text-on-tertiary-container dark:text-tertiary-fixed full-width">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter w-full px-base md:px-gutter max-w-container-max mx-auto py-section-gap-mobile md:py-section-gap-desktop">
+<div class="col-span-1 md:col-span-1">
+<div class="text-headline-md font-headline-md font-bold text-on-tertiary dark:text-on-tertiary mb-6">KodetoCareer</div>
+<p class="text-body-md font-body-md mb-6">© 2024 KodetoCareer. Bridging the gap from Kode to Career.</p>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-on-tertiary cursor-pointer hover:opacity-70 transition-opacity" data-icon="hub"></span>
+<span class="material-symbols-outlined text-on-tertiary cursor-pointer hover:opacity-70 transition-opacity" data-icon="terminal"></span>
+</div>
+</div>
+<div>
+<h4 class="text-on-tertiary font-bold mb-6 font-label-mono text-label-mono">COURSES</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">MERN with AI</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Python with AI</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Mentorship</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-tertiary font-bold mb-6 font-label-mono text-label-mono">COMPANY</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">About Us</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Contact</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-on-tertiary font-bold mb-6 font-label-mono text-label-mono">SUPPORT</h4>
+<ul class="space-y-4">
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Terms of Service</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">FAQs</a></li>
+<li><a class="text-on-tertiary-container dark:text-on-tertiary-fixed-variant hover:text-on-tertiary transition-all duration-200" href="#">Help Center</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for scroll effects
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 20) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+        
+        // Simple scale effect for enroll buttons
+        const enrollButtons = document.querySelectorAll('button');
+        enrollButtons.forEach(btn => {
+            btn.addEventListener('mousedown', () => btn.classList.add('scale-95'));
+            btn.addEventListener('mouseup', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>
